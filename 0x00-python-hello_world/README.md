@@ -22,4 +22,17 @@
 - **Description:** This script demonstrates a simple Python program that prints "Best School: 98" to the console. after saving python command to the environment variables
 - **Usage:**
   ```bash
-  0-run 
+  0-run_inline
+### 2-print
+
+- **Description:** This script demonstrates a simple Python program that prints a formated string
+- **Usage:**
+  ```bash
+  2-print
+### 3-print_number.py
+
+- **Description:** This script demonstrates a simple Python program that prints a formated string using f-string
+- **Usage:**
+  ```bash
+  3-print_number
+
