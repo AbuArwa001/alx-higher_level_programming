@@ -12,7 +12,14 @@
 
 ### 0-run
 
-- **Description:** This script demonstrates a simple Python program that prints "Hello, World!" to the console.
+- **Description:** This script demonstrates a simple Python program that prints "Best School" to the console. after saving file name to enviroment variables
+- **Usage:**
+  ```bash
+  0-run 
+
+### 1-run_inline
+
+- **Description:** This script demonstrates a simple Python program that prints "Best School: 98" to the console. after saving python command to the environment variables
 - **Usage:**
   ```bash
   0-run 
