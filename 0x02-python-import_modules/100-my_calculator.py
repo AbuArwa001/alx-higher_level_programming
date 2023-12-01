@@ -25,4 +25,4 @@ if __name__ == "__main__":
     if op == "/":
         res = cal.div(a, b)
 
-    print("{} + {} = {}".format(a, b, res))
+    print("{} {} {} = {}".format(a, op, b, res))
