@@ -18,7 +18,8 @@
 def add_tuple(tuple_a=(), tuple_b=()):
     length = max(len(tuple_a), len(tuple_b))
     result_tuple = tuple(
-        tuple_a[i] + tuple_b[i] if i < len(tuple_a) and i < len(tuple_b) and tuple_b[i] is not None else
+        tuple_a[i] + tuple_b[i] if i < len(tuple_a) and
+        i < len(tuple_b) and tuple_b[i] is not None else
         tuple_a[i] if i < len(tuple_a) else
         tuple_b[i] if i < len(tuple_b) and tuple_b[i] is not None else
         0
