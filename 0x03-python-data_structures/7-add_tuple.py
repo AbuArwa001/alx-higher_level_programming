@@ -2,7 +2,7 @@
 def add_tuple(tuple_a=(), tuple_b=()):
     length = max(len(tuple_a), len(tuple_b))
     result_tuple = []
-    for i in range(length):
+    for i in range(0, 2):
         if i > len(tuple_a) - 1:
             element_a = 0
         else:
