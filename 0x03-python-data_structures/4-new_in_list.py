@@ -2,7 +2,7 @@
 def new_in_list(my_list, idx, element):
     if not my_list:
         return
-    length = len(my_list)
+    length = len(my_list) - 1
     l_copy = []
     if idx < 0 or idx > length:
         return [i for i in my_list]
