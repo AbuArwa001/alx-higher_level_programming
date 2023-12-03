@@ -1,47 +1,50 @@
 #include "lists.h"
-#include <stdio.h>
+
 /**
  * is_palindrome - checks if list is palindrome
  * @head: the head or start of the list
- * Return: returns 1 if palidrome and 0 otherwise
-*/
+ * Return: returns 1 if palindrome and 0 otherwise
+ */
 int is_palindrome(listint_t **head)
 {
-	listint_t *h = *head, *tail = *head;
-	int *arr = NULL, size = 1, i = 0, len = 0;
+	listint_t *slow = *head, *fast = *head;
+	listint_t *prev = NULL, *next, *temp;
 
-	if (!h || !tail->next)
+	if (!slow || !slow->next)
 		return (1);
 
-	arr = malloc(sizeof(int) * size);
-	while (tail)
+	while (fast && fast->next)
 	{
-		arr[i] = tail->n;
-		tail = tail->next;
+		fast = fast->next->next;
 
-		if (tail)
-		{
-			size += 1;
-			arr = realloc(arr, sizeof(int) * size);
-		}
-		i++;
+		next = slow->next;
+		slow->next = prev;
+		prev = slow;
+		slow = next;
 	}
-	len = size - 1;
-	while (h)
+	if (fast)
+		slow = slow->next;
+
+	while (prev && slow)
 	{
-		if (h->n != arr[len])
-		{
-			free(arr);
+		if (prev->n != slow->n)
 			return (0);
-		}
-		if (len == size / 2 && h->n == arr[len])
-		{
-			free(arr);
-			return (1);
-		}
-		h = h->next;
-		len--;
+
+		prev = prev->next;
+		slow = slow->next;
 	}
-	free(arr);
+
+	temp = NULL;
+	while (head && *head)
+	{
+		next = (*head)->next;
+		(*head)->next = temp;
+		temp = *head;
+		*head = next;
+	}
+
+	/* *head now points to the new head of the list after reversing */
+	*head = temp;
+
 	return (1);
 }
