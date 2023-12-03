@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdio.h>
 /**
  * is_palindrome - checks if list is palindrome
  * @head: the head or start of the list
@@ -10,6 +11,9 @@ int is_palindrome(listint_t **head)
 	int *arr = NULL, size = 0, i = 0, len = 0;
 
 	if (!h)
+		return (1);
+
+	if (!tail->next)
 		return (1);
 
 	while (tail)
@@ -37,11 +41,9 @@ int is_palindrome(listint_t **head)
 			free(arr);
 			return (0);
 		}
-
 		h = h->next;
 		len--;
 	}
-
 	free(arr);
 	return (1);
 }
