@@ -1,10 +1,10 @@
-# 0x03. Python - Data Structures: Lists, Tuples 
+# 0x04. Python - More Data Structures: Set, Dictionary
 
 ## Folder Structure
 
-- [0-positive_or_negative.py](#0-positive_or_negative.py)
-- [1-last_digit.py](#1-run_inline)
-- [2-print_alphabet.py](#2-print_alphabet.py)
+- [0-square_matrix_simple.py](#0-square_matrix_simple.py)
+- [1-search_replace.py](#1-search_replace.py)
+- [2-uniq_add.py](#2-uniq_add.py)
 - [3-run_inline](3-run_inline/README.md)
 
 ## Scripts
