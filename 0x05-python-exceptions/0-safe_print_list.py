@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 def safe_print_list(my_list=[], x=0):
     item_index = 0
-    for index, item in enumerate(my_list):
+    for item in my_list:
         try:
             print(item, end="")
             item_index += 1
@@ -10,4 +10,4 @@ def safe_print_list(my_list=[], x=0):
         except IndexError:
             break
     print("")
-    return (item_index)
+    return item_index
