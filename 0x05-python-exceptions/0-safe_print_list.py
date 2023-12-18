@@ -9,5 +9,5 @@ def safe_print_list(my_list=[], x=0):
                 break
         except IndexError:
             break
-    print()
+    print("")
     return item_index
