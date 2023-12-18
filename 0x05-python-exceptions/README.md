@@ -3,14 +3,6 @@
 ## Overview
 This school project focuses on learning about Python exceptions and error handling. The project consists of several tasks that aim to reinforce your understanding of exceptions, their usage, and how to handle them in Python.
 
-## Author
-- **Guillaume**
-
-## Project Schedule
-- Project Start: Dec 18, 2023, 6:00 AM
-- Project End: Dec 19, 2023, 6:00 AM
-- Checker Release: Dec 18, 2023, 12:00 PM
-- Auto review will be launched at the deadline
 
 ## Resources
 - Errors and Exceptions
@@ -26,12 +18,6 @@ By the end of this project, you should be able to explain the following without 
 - The purpose of catching exceptions
 - How to raise a builtin exception
 - When to implement a clean-up action after an exception
-
-## Copyright - Plagiarism
-- Solutions for the tasks should be developed independently.
-- Copying and pasting someone else’s work is strictly prohibited.
-- Publishing any content of this project is not allowed.
-- Plagiarism will result in removal from the program.
 
 ## Requirements
 ### General
