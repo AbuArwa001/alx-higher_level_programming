@@ -8,6 +8,6 @@ def safe_print_list(my_list=[], x=0):
             if x == item_index:
                 break
         except IndexError:
-            print(end="")
+            break
     print()
     return item_index
