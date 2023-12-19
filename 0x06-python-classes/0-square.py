@@ -1,4 +1,4 @@
 #!/usr/bin/python3
 class Square:
-    """This is an emaple of an empty class with only one line"""
+    """Type class creation of empty class square"""
     pass
