@@ -22,16 +22,13 @@ void print_python_list(PyObject *p)
 	alloc = list->allocated;
 
 	printf("[*] Python list info\n");
-	fflush(stdout);
 	printf("[*] Size of the Python List = %d\n", size);
-	fflush(stdout);
 	printf("[*] Allocated = %d\n", alloc);
-	fflush(stdout);
+
 	for (i = 0; i < size; i++)
 	{
 		type = list->ob_item[i]->ob_type->tp_name;
 		printf("Element %d: %s\n", i, type);
-		fflush(stdout);
 		if (strcmp(type, "bytes") == 0)
 			print_python_bytes(list->ob_item[i]);
 	}
@@ -55,9 +52,7 @@ void print_python_bytes(PyObject *p)
 	}
 
 	printf("  size: %ld\n", ((PyVarObject *)p)->ob_size);
-	fflush(stdout);
 	printf("  trying string: %s\n", bytes->ob_sval);
-	fflush(stdout);
 
 	if (((PyVarObject *)p)->ob_size > 10)
 		size = 10;
@@ -65,20 +60,12 @@ void print_python_bytes(PyObject *p)
 		size = ((PyVarObject *)p)->ob_size + 1;
 
 	printf("  first %d bytes: ", size);
-	fflush(stdout);
 	for (c = 0; c < size; c++)
 	{
 		printf("%02hhx", bytes->ob_sval[c]);
-		fflush(stdout);
 		if (c == (size - 1))
-		{
 			printf("\n");
-			fflush(stdout);
-		}
 		else
-		{
 			printf(" ");
-			fflush(stdout);
-		}
 	}
 }
