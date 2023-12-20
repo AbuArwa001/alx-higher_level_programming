@@ -18,4 +18,3 @@ class Square:
         defining a square with attributes and methods.
     """
     pass
-
