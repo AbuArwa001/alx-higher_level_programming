@@ -3,6 +3,7 @@
 
 
 class Square:
+    """Square of an Area"""
     def __init__(self, size=0, position=(0, 0)):
         """Init the square class
         Args:
