@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Node module and calculates square area"""
+
+
 class Node:
     """Type class node"""
     def __init__(self, data, next_node=None):
