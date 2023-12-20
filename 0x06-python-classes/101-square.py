@@ -4,19 +4,27 @@
 
 class Square:
     def __init__(self, size=0, position=(0, 0)):
+        """Init the square class
+        Args:
+        param1: size is the type int attribute to make it private
+        param2: posiition of the iterator
+        """
         self.size = size
         self.position = position
 
     @property
     def size(self):
+        """Returns Size of the side of the square"""
         return self.__size
 
     @property
     def position(self):
+        """Returns Size of the side of the square"""
         return self.__position
 
     @size.setter
     def size(self, value):
+        """"set size"""
         if not isinstance(value, int):
             raise TypeError("size must be an integer")
         elif value < 0:
@@ -25,6 +33,7 @@ class Square:
 
     @position.setter
     def position(self, value):
+        """"set position"""
         if (not isinstance(value, tuple) or
                 len(value) != 2 or
                 not all(isinstance(number, int) for number in value) or
@@ -47,6 +56,7 @@ class Square:
             print("")
 
     def __str__(self):
+        """Str to get information about the class"""
         if self.__size != 0:
             [print("")for i in range(0, self.__position[1])]
         for i in range(0, self.__size):
