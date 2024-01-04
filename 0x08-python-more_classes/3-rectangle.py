@@ -41,6 +41,7 @@ class Rectangle:
             self.__height = value
 
     def area(self):
+        """Calculates Area of Rectangle"""
         return self.__height * self.__width
 
     def perimeter(self):
@@ -48,15 +49,6 @@ class Rectangle:
             return 0
         return 2 * (self.__height + self.__width)
 
-    # def __str__(self):
-    #     strn = ""
-    #     for i in range(self.__height):
-    #         for j in range(self.__width):
-    #             strn += "#"
-    #         if i + 1 != self.__height:
-    #             strn += "\n"
-    #     rows = ["#" * self.__width for _ in range(self.__height)]
-    #     return f"{rows}"
     def __str__(self):
         """Str string information for a class"""
         rows = ["#" * self.__width for _ in range(self.__height)]
