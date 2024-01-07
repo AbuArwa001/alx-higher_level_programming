@@ -1,0 +1,38 @@
+=====================================
+ADD INTEGERS TEST FILE
+=====================================
+>>> add_integer = __import__('0-add_integer').add_integer
+
+>>> add_integer(1, 2)
+3
+
+>>> add_integer(100, -2)
+98
+
+>>> add_integer(2)
+100
+
+>>> add_integer(100.3, -2)
+98
+
+>>> try:
+...     add_integer(4, "School")
+... except Exception as e:
+...     print(e)
+b must be an integer
+
+>>> try:
+...     add_integer("school", 4)
+... except Exception as e:
+...     print(e)
+a must be an integer
+
+>>> try:
+...     add_integer(None)
+... except Exception as e:
+...     print(e)
+a must be an integer
+    >>> add_integer(1, 2, 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: add_integer() takes from 1 to 2 positional arguments but 3 were given
