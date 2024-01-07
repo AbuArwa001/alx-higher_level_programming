@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+"""
+    Module: print_square
+    This module provides a function print_square(size)
+    prints a square.
+"""
+
 
 def print_square(size):
     """
