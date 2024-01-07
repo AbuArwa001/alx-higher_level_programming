@@ -1,0 +1,50 @@
+=====================================
+MATRIX DIVIDED TEST FILE
+=====================================
+>>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+# Test cases with correct input
+>>> matrix1 = [
+...     [1, 2, 3],
+...     [4, 5, 6]
+... ]
+>>> matrix_divided(matrix1, 2)
+[[0.5, 1.0, 1.5], [2.0, 2.5, 3.0]]
+
+>>> matrix2 = [
+...     [0.1, 0.2, 0.3],
+...     [0.4, 0.5, 0.6]
+... ]
+>>> matrix_divided(matrix2, 0.1)
+[[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
+
+# Test cases with incorrect input
+>>> try:
+...     matrix_divided("matrix", 2)
+... except Exception as e:
+...     print(e)
+matrix must be a matrix (list of lists) of integers/floats
+
+>>> try:
+...     matrix_divided([[1, 2, 3], [4, 5, 6], [7, 8]], 2)
+... except Exception as e:
+...     print(e)
+Each row of the matrix must have the same size
+
+>>> try:
+...     matrix_divided([[1, 2, 3], [4, 5, 6]], "2")
+... except Exception as e:
+...     print(e)
+div must be a number
+
+>>> try:
+...     matrix_divided([[1, 2, 3], [4, 5, 6]], 0)
+... except Exception as e:
+...     print(e)
+division by zero
+
+>>> try:
+...     matrix_divided([[1, 2, 3], [4, 5, "6"]], 2)
+... except Exception as e:
+...     print(e)
+all elements of the matrix must be integers or floats
