@@ -22,5 +22,4 @@ class MyList(list):
 
         """
         sorted_list = sorted(self)
-        #for item in sorted_list:
         print(sorted_list)
