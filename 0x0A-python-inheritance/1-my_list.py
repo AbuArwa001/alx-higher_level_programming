@@ -21,5 +21,9 @@ class MyList(list):
             None
 
         """
-        sorted_list = sorted(self)
-        print(sorted_list)
+        if all(isinstance(element, int) for element in self):
+            sorted_list = sorted(self)
+            print(sorted_list)
+        else:
+            print("Unable to sort the list: "
+                  "All elements must be integers or floats.")
