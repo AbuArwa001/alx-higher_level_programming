@@ -1,0 +1,28 @@
+# 0-read_file.txt
+
+"""
+    Test cases for the read_file module.
+"""
+
+# Test Case 1: Read contents of a file
+# Contents of test_file.txt: "Hello, World!"
+>>> read_file = __import__('0-read_file').read_file
+>>> read_file("my_file_0.txt")
+We offer a truly innovative approach to education:
+focus on building reliable applications and scalable systems, take on real-world challenges, collaborate with your peers.
+<BLANKLINE>
+A school every software engineer would have dreamt of!
+<BLANKLINE>
+
+# Test Case 2: Read contents of an empty file
+# Contents of empty_file.txt: ""
+>>> read_file("empty.txt")
+<BLANKLINE>
+
+# Test Case 3: Read contents of a non-existent file (should raise FileNotFoundError)
+# Uncomment the line below to test
+>>> try:
+...     read_file("nonexistent_file.txt")
+... except Exception as e:
+...     print(e)
+[Errno 2] No such file or directory: 'nonexistent_file.txt'
