@@ -1,0 +1,26 @@
+# Test case for MyList class
+
+# Import the MyList class from the module
+>>> MyList = __import__('1-my_list').MyList
+
+>>> my_list = MyList()
+
+# Test case 1: Sorting a list of integers
+>>> my_list.extend([4, 1, 7, 2])
+>>> my_list.print_sorted()
+[1, 2, 4, 7]
+
+# Test case 2: Sorting a list of floats
+>>> my_list.clear()
+>>> my_list.extend([3.5, 1.2, 2.8, 4.1])
+>>> my_list.print_sorted()
+[1.2, 2.8, 3.5, 4.1]
+
+# Test case 3: Sorting a list with mixed types (should fail)
+>>> my_list.clear()
+>>> my_list.extend([4, 1, 'apple', 2])
+>>> try:
+...     my_list.print_sorted()
+... except Exception as e:
+...     print(e)
+Unable to sort the list: All elements must be integers or floats.
