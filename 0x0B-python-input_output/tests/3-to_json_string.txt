@@ -1,0 +1,30 @@
+# 3-to_json_string.txt
+
+"""
+    Test cases for the to_json_string module.
+"""
+
+# Test Case 1: Convert a dictionary to a JSON string
+# Input: {'name': 'John', 'age': 30, 'city': 'New York'}
+# Expected Output: '{"name": "John", "age": 30, "city": "New York"}'
+>>> to_json_string = __import__('3-to_json_string').to_json_string
+>>> to_json_string({'name': 'John', 'age': 30, 'city': 'New York'})
+'{"name": "John", "age": 30, "city": "New York"}'
+
+# Test Case 2: Convert an empty dictionary to a JSON string
+# Input: {}
+# Expected Output: '{}'
+>>> to_json_string({})
+'{}'
+
+# Test Case 3: Convert a list to a JSON string
+# Input: [1, 2, 3, 4, 5]
+# Expected Output: '[1, 2, 3, 4, 5]'
+>>> to_json_string([1, 2, 3, 4, 5])
+'[1, 2, 3, 4, 5]'
+
+# Test Case 4: Convert a string to a JSON string
+# Input: "Hello, World!"
+# Expected Output: '"Hello, World!"'
+>>> to_json_string("Hello, World!")
+'"Hello, World!"'
