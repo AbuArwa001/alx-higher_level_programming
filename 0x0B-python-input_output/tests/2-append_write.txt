@@ -1,0 +1,28 @@
+# 2-append_write.txt
+
+"""
+    Test cases for the write_file module.
+"""
+
+# Test Case 1: Write text to a new file
+# Contents of new_file.txt: "Hello, World!"
+>>> append_write = __import__('2-append_write').append_write
+>>> append_write("new_file.txt", "Hello, World!")
+13
+
+# Test Case 2: Write text to an existing file (override content)
+# Contents of existing_file.txt (before): "Old Content"
+# Contents of existing_file.txt (after): "New Content"
+>>> append_write("existing_file.txt", "New Content")
+11
+
+# Test Case 3: Write an empty string to a file
+# Contents of empty_file.txt (before): "Previous Content"
+# Contents of empty_file.txt (after): ""
+>>> append_write("empty_file.txt", "")
+0
+
+# Test Case 4: Write to a file with special characters
+# Contents of special_chars.txt: "Special Characters: ©πøåß"
+>>> append_write("special_chars.txt", "Special Characters: ©πøåß")
+25
