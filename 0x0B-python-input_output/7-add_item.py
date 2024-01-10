@@ -12,7 +12,6 @@ if __name__ == '__main__':
     import sys
     import os
 
-    # my_list = add_to_list(sys.argv)
     my_list = []
     for i, arg in enumerate(sys.argv):
         if i != 0:
