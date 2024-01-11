@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-""" 
-0x0A. Python - Inheritance, task 8 
+"""
+0x0A. Python - Inheritance, task 8
 """
 
 
