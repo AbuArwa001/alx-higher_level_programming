@@ -3,7 +3,8 @@
 0x0B. Python - Input/Output, task 16. Log parsing
 
 Parses a log of HTTP GET request results from stdin to tabulate the total
-counts of status codes appearing in each response, and the total file size
+counts of status codes appearing in each response,
+and the total file size
 across all requests.
 
 Example of expected log line input:
@@ -55,10 +56,10 @@ if __name__ == '__main__':
             timecode = b[0].lstrip(' [')
             try:
                 datetime.strptime(timecode, '%Y-%m-%d %H:%M:%S.%f')
-            except:
-                stderr.write("{}: {}: invalid timecode\n".format(
-                    argv[0], line_no))
-                pass
+            except ValueError as e:
+                # Handle the specific exception for invalid timecode
+                error_msg = f"{script_name}: {line_no}: invalid timecode - {e}"
+                stderr.write(error_msg)
 
             # checking URL
             c = b[1].split('"')
@@ -85,6 +86,6 @@ if __name__ == '__main__':
                 print_log_totals(total_file_size, code_counts)
         print_log_totals(total_file_size, code_counts)
 
-    except (KeyboardInterrupt):
+    except KeyboardInterrupt:
         print_log_totals(total_file_size, code_counts)
         raise
