@@ -37,4 +37,3 @@ class Square(Rectangle):
 
         """
         return self.__size ** 2
-'''
