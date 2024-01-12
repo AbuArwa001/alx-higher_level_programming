@@ -8,6 +8,9 @@ from models.base import Base
 
 class TestBase(unittest.TestCase):
     """Test cases for the Base class"""
+    def setUp(self):
+        # This method will be called before each test case
+        Base._Base__nb_objects = 0
 
     def test_instance_creation_with_id(self):
         """Test instance creation with a specified id"""
@@ -31,8 +34,8 @@ class TestBase(unittest.TestCase):
             print(Base.__nb_objects)
 
     def test_nb_objects_initial_value(self):
-        """Test if __nb_objects is initially 0"""
-        b = Base()
+        """Test if __nb_objects is initially 0 if id not null"""
+        b = Base(2)
         self.assertEqual(type(b)._Base__nb_objects, 0)
 
     def test_nb_objects_incremented(self):
