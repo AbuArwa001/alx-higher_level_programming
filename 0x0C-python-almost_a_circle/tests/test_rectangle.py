@@ -47,6 +47,42 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(rect.y, 3)
         self.assertEqual(rect.id, 7)
 
+    def test_area_calculation(self):
+        # Test case to check if the area method correctly calculates the area of a rectangle
+        # Case 1: Normal values
+        rect1 = Rectangle(5, 10)
+        self.assertEqual(rect1.area(), 50)
+
+        # Case 2: Zero width and non-zero height
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            rect8 = Rectangle(0, 8)
+            rect8.area()
+
+        # Case 3: Non-zero width and zero height
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            rect3 = Rectangle(6, 0)
+            rect3.area()
+
+        # Case 4: Zero width and zero height
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            rect4 = Rectangle(0, 0)
+            rect4.area()
+
+        # Case 5: Negative width and non-zero height
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            rect5 = Rectangle(-3, 12)
+            rect5.area()
+
+        # Case 6: Non-zero width and negative height
+        with self.assertRaises(ValueError, msg="height must be > 0"):
+            rect6 = Rectangle(7, -4)
+            rect6.area()
+
+        # Case 7: Negative width and negative height
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            rect7 = Rectangle(-2, -6)
+            rect7.area()
+
 
 if __name__ == '__main__':
     unittest.main()
