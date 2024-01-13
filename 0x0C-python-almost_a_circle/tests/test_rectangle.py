@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """Module for testing the Rectangle class"""
+import io
 import unittest
 from io import StringIO
+from unittest.mock import patch
 import sys
 from models.rectangle import Rectangle
 
@@ -10,6 +12,7 @@ class TestRectangle(unittest.TestCase):
     def setUp(self):
         # This method will be called before each test case
         Rectangle._Base__nb_objects = 0
+        sys.stdout.flush()
 
     def test_input_not_int(self):
         attributes_to_test = ['height', 'width', 'x', 'y']
@@ -84,54 +87,68 @@ class TestRectangle(unittest.TestCase):
             rect7 = Rectangle(-2, -6)
             rect7.area()
 
-    def test_display_method(self):
-        # Test case to check if the display method correctly prints the rectangle
+    def test_str_method(self):
+        # Test case to check if the str method returns the correct string representation
         # Case 1: Normal values
-        rect1 = Rectangle(3, 4)
-        captured_output1 = StringIO()
-        sys.stdout = captured_output1
-        rect1.display()
-        sys.stdout = sys.__stdout__
-        self.assertEqual(captured_output1.getvalue(), "###\n###\n###\n###\n")
+        rect1 = Rectangle(3, 4, 1, 2, 5)
+        self.assertEqual(str(rect1), "[Rectangle] (5) 1/2 - 3/4")
 
         # Case 2: Zero width and non-zero height
-        # rect2 = Rectangle(0, 5)
-        # captured_output2 = StringIO()
-        # sys.stdout = captured_output2
-        # rect2.display()
-        # sys.stdout = sys.__stdout__
-        # self.assertEqual(captured_output2.getvalue(), "\n\n\n\n\n")
-        #
-        # # Case 3: Non-zero width and zero height
-        # rect3 = Rectangle(7, 0)
-        # captured_output3 = StringIO()
-        # sys.stdout = captured_output3
-        # rect3.display()
-        # sys.stdout = sys.__stdout__
-        # self.assertEqual(captured_output3.getvalue(), "\n\n\n\n\n\n\n")
-        #
-        # # Case 4: Zero width and zero height
-        # rect4 = Rectangle(0, 0)
-        # captured_output4 = StringIO()
-        # sys.stdout = captured_output4
-        # rect4.display()
-        # sys.stdout = sys.__stdout__
-        # self.assertEqual(captured_output4.getvalue(), "")
+        # rect2 = Rectangle(0, 5, 0, 0, 10)
+        # self.assertEqual(str(rect2), "[Rectangle] (10) 0/0 - 0/5")
+
+        # Case 3: Non-zero width and zero height
+        # rect3 = Rectangle(7, 0, 2, 3, 7)
+        # self.assertEqual(str(rect3), "[Rectangle] (7) 2/3 - 7/0")
+
+        # Case 4: Zero width and zero height
+        # rect4 = Rectangle(0, 0, 0, 0, 1)
+        # self.assertEqual(str(rect4), "[Rectangle] (1) 0/0 - 0/0")
 
         # Case 5: Negative width and non-zero height
         with self.assertRaises(ValueError, msg="width must be > 0"):
-            rect5 = Rectangle(-3, 8)
-            rect5.display()
+            rect5 = Rectangle(-3, 8, 1, 1, 20)
+            str(rect5)
 
         # Case 6: Non-zero width and negative height
         with self.assertRaises(ValueError, msg="height must be > 0"):
-            rect6 = Rectangle(4, -5)
-            rect6.display()
+            rect6 = Rectangle(4, -5, 2, 2, 15)
+            str(rect6)
 
         # Case 7: Negative width and negative height
         with self.assertRaises(ValueError, msg="width must be > 0"):
-            rect7 = Rectangle(-2, -6)
-            rect7.display()
+            rect7 = Rectangle(-2, -6, 3, 4, 8)
+            str(rect7)
+
+    def test_display_method(self):
+        # Test case to check if the display method prints the rectangle with correct x and y values
+        # Case 1: Normal values
+        rect1 = Rectangle(3, 4, 1, 2, 5)
+        expected_output1 = "\n\n ###\n ###\n ###\n ###\n"
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            rect1.display()
+            self.assertEqual(mock_stdout.getvalue(), expected_output1)
+
+        # Case 2: Non-zero x and y values
+        rect2 = Rectangle(4, 3, 2, 1, 7)
+        expected_output2 = "\n  ####\n  ####\n  ####\n"
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            rect2.display()
+            self.assertEqual(mock_stdout.getvalue(), expected_output2)
+
+        # Case 3: Zero x and non-zero y values
+        rect3 = Rectangle(2, 2, 0, 3, 9)
+        expected_output3 = "\n\n\n##\n##\n"
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            rect3.display()
+            self.assertEqual(mock_stdout.getvalue(), expected_output3)
+
+        # Case 4: Non-zero x and zero y values
+        rect4 = Rectangle(3, 5, 2, 0, 12)
+        expected_output4 = "  ###\n  ###\n  ###\n  ###\n  ###\n"
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            rect4.display()
+            self.assertEqual(mock_stdout.getvalue(), expected_output4)
 
 
 if __name__ == '__main__':
