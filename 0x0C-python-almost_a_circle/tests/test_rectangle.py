@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """Module for testing the Rectangle class"""
 import unittest
-
+from io import StringIO
+import sys
 from models.rectangle import Rectangle
 
 
@@ -82,6 +83,55 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaises(ValueError, msg="width must be > 0"):
             rect7 = Rectangle(-2, -6)
             rect7.area()
+
+    def test_display_method(self):
+        # Test case to check if the display method correctly prints the rectangle
+        # Case 1: Normal values
+        rect1 = Rectangle(3, 4)
+        captured_output1 = StringIO()
+        sys.stdout = captured_output1
+        rect1.display()
+        sys.stdout = sys.__stdout__
+        self.assertEqual(captured_output1.getvalue(), "###\n###\n###\n###\n")
+
+        # Case 2: Zero width and non-zero height
+        # rect2 = Rectangle(0, 5)
+        # captured_output2 = StringIO()
+        # sys.stdout = captured_output2
+        # rect2.display()
+        # sys.stdout = sys.__stdout__
+        # self.assertEqual(captured_output2.getvalue(), "\n\n\n\n\n")
+        #
+        # # Case 3: Non-zero width and zero height
+        # rect3 = Rectangle(7, 0)
+        # captured_output3 = StringIO()
+        # sys.stdout = captured_output3
+        # rect3.display()
+        # sys.stdout = sys.__stdout__
+        # self.assertEqual(captured_output3.getvalue(), "\n\n\n\n\n\n\n")
+        #
+        # # Case 4: Zero width and zero height
+        # rect4 = Rectangle(0, 0)
+        # captured_output4 = StringIO()
+        # sys.stdout = captured_output4
+        # rect4.display()
+        # sys.stdout = sys.__stdout__
+        # self.assertEqual(captured_output4.getvalue(), "")
+
+        # Case 5: Negative width and non-zero height
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            rect5 = Rectangle(-3, 8)
+            rect5.display()
+
+        # Case 6: Non-zero width and negative height
+        with self.assertRaises(ValueError, msg="height must be > 0"):
+            rect6 = Rectangle(4, -5)
+            rect6.display()
+
+        # Case 7: Negative width and negative height
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            rect7 = Rectangle(-2, -6)
+            rect7.display()
 
 
 if __name__ == '__main__':
