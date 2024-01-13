@@ -30,8 +30,8 @@ class Rectangle(Base):
         super().__init__(id)
         self.width = width
         self.height = height
-        self.var_x = x
-        self.var_y = y
+        self.x = x
+        self.y = y
 
     @property
     def width(self):
@@ -62,12 +62,12 @@ class Rectangle(Base):
         self.__height = value
 
     @property
-    def var_x(self):
+    def x(self):
         """Get the x-coordinate of the rectangle."""
         return self.__x
 
-    @var_x.setter
-    def var_x(self, value):
+    @x.setter
+    def x(self, value):
         """Set the x-coordinate of the rectangle."""
         if not isinstance(value, int):
             raise TypeError("x must be an integer")
@@ -76,15 +76,15 @@ class Rectangle(Base):
         self.__x = value
 
     @property
-    def var_y(self):
+    def y(self):
         """Get the y-coordinate of the rectangle."""
         return self.__y
 
-    @var_y.setter
-    def var_y(self, value):
+    @y.setter
+    def y(self, value):
         """Set the y-coordinate of the rectangle."""
         if not isinstance(value, int):
             raise TypeError("y must be an integer")
         if value < 0:
-            raise ValueError("x must be >= 0")
+            raise ValueError("y must be >= 0")
         self.__y = value

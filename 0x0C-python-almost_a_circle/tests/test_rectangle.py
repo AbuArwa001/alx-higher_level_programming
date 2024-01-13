@@ -43,8 +43,8 @@ class TestRectangle(unittest.TestCase):
         rect = Rectangle(5, 10, 2, 3, 7)
         self.assertEqual(rect.width, 5)
         self.assertEqual(rect.height, 10)
-        self.assertEqual(rect.var_x, 2)
-        self.assertEqual(rect.var_y, 3)
+        self.assertEqual(rect.x, 2)
+        self.assertEqual(rect.y, 3)
         self.assertEqual(rect.id, 7)
 
 
