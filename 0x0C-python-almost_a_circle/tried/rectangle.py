@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 """Module containing class Rectangle"""
-import json
-
 from models.base import Base
 
 
@@ -117,85 +115,53 @@ class Rectangle(Base):
             print()
 
     def __str__(self):
-        from models.square import Square
         """
         str creates a string info
         Returns:
             class info string
 
         """
-        string = f'[Square]' if type(self) is Square else f'[Rectangle]'
+        string = f'[Square]' if self.width == self.height else f'[Rectangle]'
         h_w = f"{self.width}" if string == '[Square]'\
             else f"{self.width}/{self.height}"
         return f"{string} ({self.id}) {self.x}/{self.y} - {h_w}"
 
     def update(self, *args, **kwargs):
         """
-        Updates the attributes of the Rectangle instance
-                        based on the provided arguments.
+        Updates the attributes of the Rectangle instance based on the provided arguments.
 
         Args:
-            *args: Variable number of positional arguments
-                    representing the values for the attributes.
-            **kwargs: Variable number of keyword arguments where:
-                            the keys correspond to the attribute names.
+            *args: Variable number of positional arguments representing the values for the attributes.
+            **kwargs: Variable number of keyword arguments where the keys correspond to the attribute names.
 
         Example:
             rect = Rectangle(1, 2, 3, 4, 5)
             rect.update(10, width=20, height=30, x=4, y=5)
 
-        The method allows updating attributes either through \
-            positional arguments or keyword arguments.
-        For positional arguments, the order should \
-            match the attributes: id, width, height, x, y.
-        For keyword arguments, the keys should be the attribute \
-            names prefixed with '_Rectangle__'.
-        Note: If a non-existing attribute is provided in **kwargs, \
-            it will be ignored.
+        The method allows updating attributes either through positional arguments or keyword arguments.
+        For positional arguments, the order should match the attributes: id, width, height, x, y.
+        For keyword arguments, the keys should be the attribute names.
+
+        Note: If a non-existing attribute is provided in **kwargs, it will be ignored.
 
         Returns:
             None
         """
-        width = '_Rectangle__width'
-        height = '_Rectangle__height'
-        x = '_Rectangle__x'
-        y = '_Rectangle__y'
-        ls = ['id', width, height, x, y]
-        re_dict = self.__dict__
-        key = ""
-        if not args:
-            for item in kwargs:
-                if item != 'id':
-                    key = "_Rectangle__" + item if item != 'size' else "_Square__" + item
-                else:
-                    key = item
-                if key in re_dict:
-                    re_dict.update({key: kwargs.get(item)})
-                key = ""
-                # re_dict[ls[index]] = item
-        else:
-            for index, item in enumerate(args):
-                re_dict[ls[index]] = item
-            # re_dict.update({self.__dict__ls[index]: item})
+        attribute_names = ['id', '_Rectangle__width', '_Rectangle__height', '_Rectangle__x', '_Rectangle__y']
+        attributes = {'id': self.id, '_Rectangle__width': self.__width,
+                      '_Rectangle__height': self.__height, '_Rectangle__x': self.__x, '_Rectangle__y': self.__y}
 
-    def to_dictionary(self):
-        from models.square import Square
-        """
-        Returns a dictionary representation of the instance.
+        if args:
+            for index, value in enumerate(args):
+                attributes[attribute_names[index]] = value
 
-        Returns:
-            dict: A dictionary containing the attributes of the instance.
-        """
-        dic = {
-            'id': self.id,
-            'x': self.x,
-            'y': self.y,
-        }
+        for key, value in kwargs.items():
+            if key in attributes:
+                attributes[key] = value
 
-        if isinstance(self, Square):
-            dic['size'] = self.size
-        else:
-            dic['width'] = self.width
-            dic['height'] = self.height
+        self.id = attributes['id']
+        self.__width = attributes['_Rectangle__width']
+        self.__height = attributes['_Rectangle__height']
+        self.__x = attributes['_Rectangle__x']
+        self.__y = attributes['_Rectangle__y']
 
-        return dic
