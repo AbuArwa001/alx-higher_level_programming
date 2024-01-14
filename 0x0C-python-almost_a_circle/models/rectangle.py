@@ -105,7 +105,67 @@ class Rectangle(Base):
             None
 
         """
+        for _ in range(self.__y):
+            print()
+
         for _ in range(self.__height):
+            print(" " * self.__x, end="")
             for _ in range(self.__width):
                 print("#", end="")
             print()
+
+    def __str__(self):
+        """
+        str creates a string info
+        Returns:
+            class info string
+
+        """
+        h_w = f"{self.width}/{self.height}"
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {h_w}"
+
+    def update(self, *args, **kwargs):
+        """
+        Updates the attributes of the Rectangle instance
+                        based on the provided arguments.
+
+        Args:
+            *args: Variable number of positional arguments
+                    representing the values for the attributes.
+            **kwargs: Variable number of keyword arguments where:
+                            the keys correspond to the attribute names.
+
+        Example:
+            rect = Rectangle(1, 2, 3, 4, 5)
+            rect.update(10, width=20, height=30, x=4, y=5)
+
+        The method allows updating attributes either through \
+            positional arguments or keyword arguments.
+        For positional arguments, the order should \
+            match the attributes: id, width, height, x, y.
+        For keyword arguments, the keys should be the attribute \
+            names prefixed with '_Rectangle__'.
+        Note: If a non-existing attribute is provided in **kwargs, \
+            it will be ignored.
+
+        Returns:
+            None
+        """
+        width = '_Rectangle__width'
+        height = '_Rectangle__height'
+        x = '_Rectangle__x'
+        y = '_Rectangle__y'
+        ls = ['id', width, height, x, y]
+        re_dict = self.__dict__
+        key = ""
+        if not args:
+            for item in kwargs:
+                key = "_Rectangle__" + item
+                if key in re_dict:
+                    re_dict.update({key: kwargs.get(item)})
+                key = ""
+                # re_dict[ls[index]] = item
+        else:
+            for index, item in enumerate(args):
+                re_dict[ls[index]] = item
+            # re_dict.update({self.__dict__ls[index]: item})

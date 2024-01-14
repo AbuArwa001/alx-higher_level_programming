@@ -12,6 +12,7 @@ class TestRectangle(unittest.TestCase):
     def setUp(self):
         # This method will be called before each test case
         Rectangle._Base__nb_objects = 0
+        self.rectz = Rectangle(1, 2, 3, 4, 5)
         sys.stdout.flush()
 
     def test_input_not_int(self):
@@ -149,6 +150,24 @@ class TestRectangle(unittest.TestCase):
         with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
             rect4.display()
             self.assertEqual(mock_stdout.getvalue(), expected_output4)
+
+    def test_update_method(self):
+        # Test case to check if the update method correctly updates attributes using positional arguments
+        # rect = Rectangle(1, 2, 3, 4, 5)
+        self.rectz.update(10, 20, 30, 4, 5)
+        self.assertEqual(str(self.rectz), "[Rectangle] (10) 4/5 - 20/30")
+
+        # Test case to check if the update method correctly updates attributes using keyword arguments
+        self.rectz.update(width=40, height=50, x=6, y=7)
+        self.assertEqual(str(self.rectz), "[Rectangle] (10) 6/7 - 40/50")
+
+        # Test case to check if the update method correctly handles non-existing attributes in kwargs
+        self.rectz.update(width=60, depth=70, x=8, y=9)
+        self.assertEqual(str(self.rectz), "[Rectangle] (10) 8/9 - 60/50")
+
+        # Test case to check if the update method correctly handles both positional and keyword arguments
+        self.rectz.update(100, width=80, height=90, x=10, y=11)
+        self.assertEqual(str(self.rectz), "[Rectangle] (100) 8/9 - 60/50")
 
 
 if __name__ == '__main__':
