@@ -80,21 +80,12 @@ class Base:
             An instance with all attributes already set.
         """
         from models.rectangle import Rectangle
-        from models.square import Square
 
-        if cls is Square:
-            instance = Square(1, 2)
-            print(instance.id)
-        else:
-            instance = Rectangle(1, 2, 3, 4, None)
-        dictionary['id'] = instance.id
-
-        # Remove 'id' from the dictionary to avoid overwriting
-        dictionary.pop('id', None)
-
+        instance = Rectangle(1, 2, 3, 4, None)
         instance.update(**dictionary)
 
         return instance
+
     @classmethod
     def load_from_file(cls):
         from models.square import Square

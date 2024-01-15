@@ -124,7 +124,9 @@ class Rectangle(Base):
             class info string
 
         """
-        string = f'[Square]' if type(self) is Square else f'[Rectangle]'
+        string = f'[Square]' if (type(self) is Square or
+                                 self.__width == self.__height)\
+            else f'[Rectangle]'
         h_w = f"{self.width}" if string == '[Square]'\
             else f"{self.width}/{self.height}"
         return f"{string} ({self.id}) {self.x}/{self.y} - {h_w}"
