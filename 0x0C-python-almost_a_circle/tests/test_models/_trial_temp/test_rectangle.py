@@ -2,6 +2,7 @@ import unittest
 
 from models.rectangle import Rectangle
 
+
 class TestRectangle(unittest.TestCase):
     def setUp(self):
         # This method will be called before each test case

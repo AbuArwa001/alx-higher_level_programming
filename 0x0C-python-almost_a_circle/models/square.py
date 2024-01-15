@@ -25,7 +25,7 @@ class Square(Rectangle):
             y: y-coordinate of the square
             id: id of the rectangle
         """
-        super().__init__(width=size, height=size, x=0, y=0, id=None)
+        super().__init__(width=size, height=size, x=0, y=0, id=id)
         self.x = x
         self.y = y
         self.size = size
@@ -45,7 +45,7 @@ class Square(Rectangle):
 
     def update(self, *args, **kwargs):
         """
-        Updates the attributes of the Rectangle instance
+        Updates the attributes of the Square instance
                         based on the provided arguments.
 
         Args:
@@ -55,46 +55,34 @@ class Square(Rectangle):
                             the keys correspond to the attribute names.
 
         Example:
-            rect = Rectangle(1, 2, 3, 4, 5)
-            rect.update(10, width=20, height=30, x=4, y=5)
+            sq = Square(1, 2, 3, 4)
+                where :*args is the list of arguments - no-keyworded arguments
+                1st argument should be the id attribute
+                2nd argument should be the size attribute
+                3rd argument should be the x attribute
+                4th argument should be the y attribute
+            sq.update(10, size=30, x=4, y=5)
 
         The method allows updating attributes either through \
             positional arguments or keyword arguments.
         For positional arguments, the order should \
             match the attributes: id, width, height, x, y.
         For keyword arguments, the keys should be the attribute \
-            names prefixed with '_Rectangle__'.
+            names prefixed with '_Rectangle__'. except for size
+            which is the Attribute for square class
         Note: If a non-existing attribute is provided in **kwargs, \
             it will be ignored.
 
         Returns:
             None
         """
-        width = '_Rectangle__width'
-        height = '_Rectangle__height'
-        size = '_Square__size'
-        x = '_Rectangle__x'
-        y = '_Rectangle__y'
-        ls = ['id', width, height, x, y]
-        re_dict = self.__dict__
-        key = ""
-        if not args:
-            for item in kwargs:
-                key = "_Rectangle__" + item if item != 'size' else "_Square__" + item
-                if key in re_dict:
-                    if key == '_Square__size':
-                        # print(item)
-                        re_dict.update({width: kwargs.get(item)})
-                        re_dict.update({height: kwargs.get(item)})
-                    re_dict.update({key: kwargs.get(item)})
-                key = ""
-                # re_dict[ls[index]] = item
-        else:
-            ls1 = ['id', size, x, y]
-            for index, item in enumerate(args):
-                if ls1[index] == size:
-                    re_dict[ls1[index]] = item
-                    re_dict[ls[index]] = item
-                    re_dict[ls[index + 1]] = item
-                    continue
-                re_dict[ls1[index]] = item
+        super().update(*args, **kwargs)
+
+    def to_dictionary(self):
+        """
+        Returns a dictionary representation of the instance.
+
+        Returns:
+            dict: A dictionary containing the attributes of the instance.
+        """
+        return super().to_dictionary()

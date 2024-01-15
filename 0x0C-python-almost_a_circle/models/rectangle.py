@@ -156,8 +156,10 @@ class Rectangle(Base):
         Returns:
             None
         """
+        from models.square import Square
         width = '_Rectangle__width'
         height = '_Rectangle__height'
+        size = '_Square__size'
         x = '_Rectangle__x'
         y = '_Rectangle__y'
         ls = ['id', width, height, x, y]
@@ -166,16 +168,30 @@ class Rectangle(Base):
         if not args:
             for item in kwargs:
                 if item != 'id':
-                    key = "_Rectangle__" + item if item != 'size' else "_Square__" + item
+                    key = "_Rectangle__" + item if item != 'size'\
+                        else "_Square__" + item
                 else:
                     key = item
                 if key in re_dict:
+                    if type(self) is Square and key == '_Square__size':
+                        re_dict.update({width: kwargs.get(item)})
+                        re_dict.update({height: kwargs.get(item)})
                     re_dict.update({key: kwargs.get(item)})
                 key = ""
                 # re_dict[ls[index]] = item
         else:
-            for index, item in enumerate(args):
-                re_dict[ls[index]] = item
+            if type(self) is Square:
+                ls1 = ['id', size, x, y]
+                for index, item in enumerate(args):
+                    if ls1[index] == size:
+                        re_dict[ls1[index]] = item
+                        re_dict[ls[index]] = item
+                        re_dict[ls[index + 1]] = item
+                        continue
+                    re_dict[ls1[index]] = item
+            else:
+                for index, item in enumerate(args):
+                    re_dict[ls[index]] = item
             # re_dict.update({self.__dict__ls[index]: item})
 
     def to_dictionary(self):
@@ -194,6 +210,8 @@ class Rectangle(Base):
 
         if isinstance(self, Square):
             dic['size'] = self.size
+            dic['width'] = self.size
+            dic['height'] = self.size
         else:
             dic['width'] = self.width
             dic['height'] = self.height
