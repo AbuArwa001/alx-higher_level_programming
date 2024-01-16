@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Base module for shapes"""
 import json
-
+import csv
 
 class Base:
     """Class for shapes base"""
@@ -100,3 +100,75 @@ class Base:
         list_dicts = [cls.create(**obj) for obj in list_objs]
 
         return list_dicts
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+        Saves list of dicts/objects to a CSV file.
+
+        Args:
+            list_objs: List of objects to be saved.
+
+        Returns:
+            None
+        """
+        from models.square import Square  # Ensure that the correct import is present
+
+        if cls is Square:
+            file_name = 'Square.csv'
+            fieldnames = ["id", "x", "y", "size"]
+        else:
+            file_name = 'Rectangle.csv'
+            fieldnames = ["id", "x", "y", "width", "height"]
+
+        list_dicts = [cls.to_dictionary(obj) for obj in list_objs]
+
+        with open(file_name, 'w', newline='', encoding='utf-8') as file:
+            shape_writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+            # Writing headers of CSV file
+            shape_writer.writerow(fieldnames)
+
+            for item in list_dicts:
+                if cls is Square:
+                    # For Square, only write "id", "x", "y", and "size"
+                    shape_writer.writerow([item['id'], item['x'], item['y'], item['size']])
+                else:
+                    # For Rectangle, write all fields
+                    shape_writer.writerow(item.values())
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+        Loads data from a CSV file and returns a list of dictionaries.
+
+        Returns:
+            List of dictionaries.
+        """
+        from models.square import Square  # Ensure that the correct import is present
+        from models.rectangle import Rectangle  # Ensure that the correct import is present
+
+        if cls is Square:
+            file_name = 'Square.csv'
+            fieldnames = ("id", "x", "y", "size")
+        else:
+            file_name = 'Rectangle.csv'
+            fieldnames = ("id", "x", "y", "width", "height")
+
+        lists = []
+
+        with open(file_name, 'r', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile, fieldnames)
+
+            # Skip the header row
+            next(reader, None)
+
+            for row in reader:
+                # Convert string values to appropriate types (int for 'id', 'x', 'y', 'size', 'width', 'height')
+                converted_row = {key: int(value) for key, value in row.items()}
+                print(converted_row)
+                # Create instances based on class type
+                instance = cls.create(**converted_row)
+                lists.append(instance)
+
+        return lists
