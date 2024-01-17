@@ -117,84 +117,74 @@ class Rectangle(Base):
             print()
 
     def __str__(self):
-        from models.square import Square
         """
-        str creates a string info
-        Returns:
-            class info string
+        Creates a string info.
 
+        Returns:
+            Class info string.
         """
-        string = f'[Square]' if (type(self) is Square or
-                                 self.__width == self.__height)\
-            else f'[Rectangle]'
-        h_w = f"{self.width}" if string == '[Square]'\
+        from models.square import Square
+        from models.rectangle import Rectangle
+        from models.square import Square
+
+        # if isinstance(self, Square) or size_in_args:
+        shape_type = 'Square' if (type(self) is Square
+                                  or (type(self) is Rectangle and
+                                      self.width == self.height))\
+            else 'Rectangle'
+
+        dimensions = f"{self.width}" if shape_type == 'Square' \
             else f"{self.width}/{self.height}"
-        return f"{string} ({self.id}) {self.x}/{self.y} - {h_w}"
+
+        return f"[{shape_type}] ({self.id}) {self.x}/{self.y} - {dimensions}"
 
     def update(self, *args, **kwargs):
         """
         Updates the attributes of the Rectangle instance
-                        based on the provided arguments.
+                    based on the provided arguments.
 
         Args:
             *args: Variable number of positional arguments
-                    representing the values for the attributes.
-            **kwargs: Variable number of keyword arguments where:
-                            the keys correspond to the attribute names.
+                representing the values for the attributes.
+            **kwargs: Variable number of keyword arguments
+                where the keys correspond to the attribute names.
 
         Example:
             rect = Rectangle(1, 2, 3, 4, 5)
             rect.update(10, width=20, height=30, x=4, y=5)
 
-        The method allows updating attributes either through \
-            positional arguments or keyword arguments.
-        For positional arguments, the order should \
+        The method allows updating attributes either
+                through positional arguments or keyword arguments.
+        For positional arguments, the order should
             match the attributes: id, width, height, x, y.
-        For keyword arguments, the keys should be the attribute \
-            names prefixed with '_Rectangle__'.
-        Note: If a non-existing attribute is provided in **kwargs, \
-            it will be ignored.
+        For keyword arguments, the keys should be the
+            attribute names prefixed with '_Rectangle__'.
+        Note: If a non-existing attribute is provided
+            in **kwargs, it will be ignored.
 
         Returns:
             None
         """
         from models.square import Square
-        width = '_Rectangle__width'
-        height = '_Rectangle__height'
-        size = '_Square__size'
-        x = '_Rectangle__x'
-        y = '_Rectangle__y'
-        ls = ['id', width, height, x, y]
-        re_dict = self.__dict__
-        key = ""
-        if not args:
-            for item in kwargs:
-                if item != 'id':
-                    key = "_Rectangle__" + item if item != 'size'\
-                        else "_Square__" + item
-                else:
-                    key = item
-                if key in re_dict:
-                    if type(self) is Square and key == '_Square__size':
-                        re_dict.update({width: kwargs.get(item)})
-                        re_dict.update({height: kwargs.get(item)})
-                    re_dict.update({key: kwargs.get(item)})
-                key = ""
-                # re_dict[ls[index]] = item
+        size_in_args = 'size' in kwargs
+
+        if not args and not kwargs:
+            return  # No arguments provided, nothing to update
+        # print(size_in_args)
+        if type(self) is Square or size_in_args:
+            self.__class__ = Square
+            attribute_names = ['id', '_Square__size',
+                               '_Rectangle__x', '_Rectangle__y']
         else:
-            if type(self) is Square:
-                ls1 = ['id', size, x, y]
-                for index, item in enumerate(args):
-                    if ls1[index] == size:
-                        re_dict[ls1[index]] = item
-                        re_dict[ls[index]] = item
-                        re_dict[ls[index + 1]] = item
-                        continue
-                    re_dict[ls1[index]] = item
-            else:
-                for index, item in enumerate(args):
-                    re_dict[ls[index]] = item
-            # re_dict.update({self.__dict__ls[index]: item})
+            attribute_names = ['id', '_Rectangle__width', '_Rectangle__height',
+                               '_Rectangle__x', '_Rectangle__y']
+
+        for index, item in enumerate(args):
+            setattr(self, attribute_names[index], item)
+
+        for key, value in kwargs.items():
+            if key in dir(self):
+                setattr(self, key, value)
 
     def to_dictionary(self):
         from models.square import Square

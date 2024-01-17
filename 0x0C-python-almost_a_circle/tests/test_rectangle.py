@@ -167,7 +167,7 @@ class TestRectangle(unittest.TestCase):
 
         # Test case to check if the update method correctly handles both positional and keyword arguments
         self.rectz.update(100, width=80, height=90, x=10, y=11)
-        self.assertEqual(str(self.rectz), "[Rectangle] (100) 8/9 - 60/50")
+        self.assertEqual(str(self.rectz), "[Rectangle] (100) 10/11 - 80/90")
 
 
 if __name__ == '__main__':

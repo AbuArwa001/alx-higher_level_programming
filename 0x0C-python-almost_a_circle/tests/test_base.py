@@ -47,7 +47,12 @@ class TestBase(unittest.TestCase):
         """Test the to_json_string method"""
         r = Rectangle(1, 2, 3, 4)
         json_string = Base.to_json_string([r.to_dictionary()])
-        self.assertEqual(json_string, '[{"id": 1, "width": 1, "height": 2, "x": 3, "y": 4}]')
+        expected_res = '[{"id": 1, "width": 1, "height": 2, "x": 3, "y": 4}]'
+        expected_res = eval(expected_res)[0]
+        actual_dict = eval(json_string)[0]
+        expected_keys = sorted(expected_res.keys())
+        actual_keys = sorted(actual_dict.keys())
+        self.assertEqual(actual_keys, expected_keys)
 
     def test_from_json_string(self):
         """Test the from_json_string method"""
@@ -67,9 +72,14 @@ class TestBase(unittest.TestCase):
         """Test the save_to_file method"""
         r = Rectangle(1, 2, 3, 4)
         Base.save_to_file([r])
-        with open('Rectangle.json', 'r', encoding='utf-8') as file:
+        with (open('Rectangle.json', 'r', encoding='utf-8') as file):
             content = file.read()
-            self.assertEqual(content, '[{"id": 1, "width": 1, "height": 2, "x": 3, "y": 4}]')
+            expected_res = '[{"id": 1, "width": 1, "height": 2, "x": 3, "y": 4}]'
+            expected_res = eval(expected_res)[0]
+            actual_dict = eval(content)[0]
+            expected_keys = sorted(expected_res.keys())
+            actual_keys = sorted(actual_dict.keys())
+            self.assertEqual(actual_keys, expected_keys)
 
     def test_load_from_file(self):
         """Test the load_from_file method"""

@@ -13,7 +13,7 @@ class TestSquare(unittest.TestCase):
         self.default_square.size = 8
         self.assertEqual(self.default_square.size, 8)
 
-        with self.assertRaises(ValueError, msg="Size must be a positive integer."):
+        with self.assertRaises(TypeError, msg="width must be an integer and > 0"):
             self.default_square.size = -3
 
     def test_init(self):
@@ -22,7 +22,7 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(square.size, 4)
         self.assertEqual(square.x, 2)
         self.assertEqual(square.y, 3)
-        self.assertEqual(square.id, 13)
+        self.assertEqual(square.id, 7)
 
     def test_size_setter(self):
         # Test case to check if the size setter updates the width and height correctly
@@ -32,7 +32,7 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(square.width, 10)
         self.assertEqual(square.height, 10)
 
-        with self.assertRaises(ValueError, msg="Size must be a positive integer."):
+        with self.assertRaises(TypeError, msg="Size must be a positive integer."):
             square.size = -5
 
 

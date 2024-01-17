@@ -3,6 +3,7 @@
 import json
 import csv
 
+
 class Base:
     """Class for shapes base"""
     __nb_objects = 0
@@ -44,7 +45,7 @@ class Base:
             file_name = 'Square.json'
         else:
             file_name = 'Rectangle.json'
-        list_dicts = [cls.to_dictionary(obj) for obj in list_objs]
+        list_dicts = [obj.to_dictionary() for obj in list_objs]
         jstring = cls.to_json_string(list_dicts)
 
         with open(file_name, 'w', encoding='utf-8') as f:
@@ -74,7 +75,8 @@ class Base:
         Returns an instance with all attributes already set.
 
         Args:
-            **dictionary: Keyword arguments representing the attributes.
+            **dictionary: Keyword arguments
+                representing the attributes.
 
         Returns:
             An instance with all attributes already set.
@@ -88,6 +90,14 @@ class Base:
 
     @classmethod
     def load_from_file(cls):
+        """
+        Loads list from file.
+
+        Args:
+
+        Returns:
+            Lists of dictionaries
+        """
         from models.square import Square
         file_name = 'Square.json' if cls is Square else 'Rectangle.json'
 
@@ -112,19 +122,22 @@ class Base:
         Returns:
             None
         """
-        from models.square import Square  # Ensure that the correct import is present
+        from models.square import Square
+        from models.rectangle import Rectangle
 
         if cls is Square:
             file_name = 'Square.csv'
             fieldnames = ["id", "x", "y", "size"]
         else:
+            # cls.__class__ = Rectangle
             file_name = 'Rectangle.csv'
             fieldnames = ["id", "x", "y", "width", "height"]
 
-        list_dicts = [cls.to_dictionary(obj) for obj in list_objs]
+        list_dicts = [obj.to_dictionary() for obj in list_objs]
 
         with open(file_name, 'w', newline='', encoding='utf-8') as file:
-            shape_writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            shape_writer = csv.writer(file, delimiter=',', quotechar='"',
+                                      quoting=csv.QUOTE_MINIMAL)
 
             # Writing headers of CSV file
             shape_writer.writerow(fieldnames)
@@ -132,7 +145,8 @@ class Base:
             for item in list_dicts:
                 if cls is Square:
                     # For Square, only write "id", "x", "y", and "size"
-                    shape_writer.writerow([item['id'], item['x'], item['y'], item['size']])
+                    shape_writer.writerow([item['id'], item['x'],
+                                           item['y'], item['size']])
                 else:
                     # For Rectangle, write all fields
                     shape_writer.writerow(item.values())
@@ -145,8 +159,8 @@ class Base:
         Returns:
             List of dictionaries.
         """
-        from models.square import Square  # Ensure that the correct import is present
-        from models.rectangle import Rectangle  # Ensure that the correct import is present
+        from models.square import Square
+        from models.rectangle import Rectangle
 
         if cls is Square:
             file_name = 'Square.csv'
@@ -164,9 +178,10 @@ class Base:
             next(reader, None)
 
             for row in reader:
-                # Convert string values to appropriate types (int for 'id', 'x', 'y', 'size', 'width', 'height')
+                # Convert string values to appropriate types
+                # (int for 'id', 'x', 'y', 'size', 'width', 'height')
                 converted_row = {key: int(value) for key, value in row.items()}
-                print(converted_row)
+                # print(converted_row)
                 # Create instances based on class type
                 instance = cls.create(**converted_row)
                 lists.append(instance)
