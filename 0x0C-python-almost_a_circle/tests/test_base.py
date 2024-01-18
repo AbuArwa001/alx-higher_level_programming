@@ -72,7 +72,7 @@ class TestBase(unittest.TestCase):
         """Test the save_to_file method"""
         r = Rectangle(1, 2, 3, 4)
         Base.save_to_file([r])
-        with (open('Rectangle.json', 'r', encoding='utf-8') as file):
+        with open('Rectangle.json', 'r', encoding='utf-8') as file:
             content = file.read()
             expected_res = '[{"id": 1, "width": 1, "height": 2, "x": 3, "y": 4}]'
             expected_res = eval(expected_res)[0]
