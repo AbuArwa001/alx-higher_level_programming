@@ -1,39 +1,56 @@
 #!/usr/bin/python3
-"""Module for testing the Rectangle class"""
+"""Unit tests for the Module for the Rectangle class in the shapes module.
+This module includes test cases for the Rectangle class,
+which is a foundational class for other shapes like Rectangle and Square.
+"""
+
 import io
 import unittest
 from io import StringIO
 from unittest.mock import patch
 import sys
-from models.rectangle import Rectangle
 
 
 class TestRectangle(unittest.TestCase):
+    """Test cases for the Rectangle class"""
+
     def setUp(self):
+        """Sets up the class for each test"""
+        from models.rectangle import Rectangle
         # This method will be called before each test case
         Rectangle._Base__nb_objects = 0
         self.rectz = Rectangle(1, 2, 3, 4, 5)
         sys.stdout.flush()
 
     def test_input_not_int(self):
+        """Test class inputs for rectangle"""
+        from models.rectangle import Rectangle
         attributes_to_test = ['height', 'width', 'x', 'y']
 
         for attribute in attributes_to_test:
             with self.subTest(attribute=attribute):
-                with self.assertRaises(TypeError, msg=f"{attribute} must be an integer"):
-                    # Create a Rectangle object with a non-integer value for the specified attribute
+                with self.assertRaises(TypeError, msg=f"{attribute} "
+                                                      f"must be an integer"):
+                    # Create a Rectangle object with a non-integer
+                    # value for the specified attribute
                     rectangle1 = Rectangle("5", 2, 0, 0, 12)
 
     def test_value_error(self):
+        """Test if ValueError is raised for invalid attribute values"""
+        from models.rectangle import Rectangle
         attributes_to_test = ['height', 'width']
         for attribute in attributes_to_test:
             with self.subTest(attribute=attribute):
-                with self.assertRaises(ValueError, msg=f"{attribute} must be > 0"):
-                    # Create a Rectangle object with a non-positive value for the specified attribute
+                with self.assertRaises(ValueError,
+                                       msg=f"{attribute} must be > 0"):
+                    # Create a Rectangle object with a
+                    # non-positive value for the specified attribute
                     rectangle1 = Rectangle(-1, 9)
                     rectangle2 = Rectangle(1, 0)
 
     def test_negative_x_and_y(self):
+        """Test if ValueError is raised for negative x and y values"""
+        from models.rectangle import Rectangle
         # Test case with negative values for x and y
         with self.subTest(attribute="x"):
             with self.assertRaises(ValueError, msg="x must be >= 0"):
@@ -44,7 +61,8 @@ class TestRectangle(unittest.TestCase):
                 Rectangle(5, 10, 2, -3, 7)
 
     def test_normal_values(self):
-        # Test case with normal values for height, width, x, and y
+        """Test with normal values for height, width, x, and y"""
+        from models.rectangle import Rectangle
         rect = Rectangle(5, 10, 2, 3, 7)
         self.assertEqual(rect.width, 5)
         self.assertEqual(rect.height, 10)
@@ -53,7 +71,8 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(rect.id, 7)
 
     def test_area_calculation(self):
-        # Test case to check if the area method correctly calculates the area of a rectangle
+        """Test the area calculation method"""
+        from models.rectangle import Rectangle
         # Case 1: Normal values
         rect1 = Rectangle(5, 10)
         self.assertEqual(rect1.area(), 50)
@@ -89,7 +108,8 @@ class TestRectangle(unittest.TestCase):
             rect7.area()
 
     def test_str_method(self):
-        # Test case to check if the str method returns the correct string representation
+        """Test the str method"""
+        from models.rectangle import Rectangle
         # Case 1: Normal values
         rect1 = Rectangle(3, 4, 1, 2, 5)
         self.assertEqual(str(rect1), "[Rectangle] (5) 1/2 - 3/4")
@@ -122,7 +142,8 @@ class TestRectangle(unittest.TestCase):
             str(rect7)
 
     def test_display_method(self):
-        # Test case to check if the display method prints the rectangle with correct x and y values
+        """Test the display method"""
+        from models.rectangle import Rectangle
         # Case 1: Normal values
         rect1 = Rectangle(3, 4, 1, 2, 5)
         expected_output1 = "\n\n ###\n ###\n ###\n ###\n"
@@ -152,20 +173,24 @@ class TestRectangle(unittest.TestCase):
             self.assertEqual(mock_stdout.getvalue(), expected_output4)
 
     def test_update_method(self):
-        # Test case to check if the update method correctly updates attributes using positional arguments
-        # rect = Rectangle(1, 2, 3, 4, 5)
+        """Test the update method"""
+        # Test case to check if the update method correctly
+        # updates attributes using positional arguments
         self.rectz.update(10, 20, 30, 4, 5)
         self.assertEqual(str(self.rectz), "[Rectangle] (10) 4/5 - 20/30")
 
-        # Test case to check if the update method correctly updates attributes using keyword arguments
+        # Test case to check if the update method
+        # correctly updates attributes using keyword arguments
         self.rectz.update(width=40, height=50, x=6, y=7)
         self.assertEqual(str(self.rectz), "[Rectangle] (10) 6/7 - 40/50")
 
-        # Test case to check if the update method correctly handles non-existing attributes in kwargs
+        # Test case to check if the update method
+        # correctly handles non-existing attributes in kwargs
         self.rectz.update(width=60, depth=70, x=8, y=9)
         self.assertEqual(str(self.rectz), "[Rectangle] (10) 8/9 - 60/50")
 
-        # Test case to check if the update method correctly handles both positional and keyword arguments
+        # Test case to check if the update method
+        # correctly handles both positional and keyword arguments
         self.rectz.update(100, width=80, height=90, x=10, y=11)
         self.assertEqual(str(self.rectz), "[Rectangle] (100) 10/11 - 80/90")
 
