@@ -2,7 +2,7 @@
 """Module containing class Rectangle"""
 import json
 
-from models.base import Base
+from .base import Base
 
 
 class Rectangle(Base):
@@ -123,13 +123,12 @@ class Rectangle(Base):
         Returns:
             Class info string.
         """
-        from models.square import Square
-        from models.rectangle import Rectangle
-        from models.square import Square
+        # from .rectangle import Rectangle
+        from .square import Square
 
         # if isinstance(self, Square) or size_in_args:
         shape_type = 'Square' if (type(self) is Square
-                                  or (type(self) is Rectangle and
+                                  or (type(self) is self.__class__ and
                                       self.width == self.height))\
             else 'Rectangle'
 
@@ -165,7 +164,7 @@ class Rectangle(Base):
         Returns:
             None
         """
-        from models.square import Square
+        from.square import Square
         size_in_args = 'size' in kwargs
 
         if not args and not kwargs:
@@ -187,7 +186,7 @@ class Rectangle(Base):
                 setattr(self, key, value)
 
     def to_dictionary(self):
-        from models.square import Square
+        from .square import Square
         """
         Returns a dictionary representation of the instance.
 
