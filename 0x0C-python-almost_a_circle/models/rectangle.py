@@ -226,5 +226,3 @@ class Rectangle(Base):
             dic['height'] = self.height
 
         return dic
-
-
