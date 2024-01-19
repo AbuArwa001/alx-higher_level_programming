@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """Module containing class Rectangle"""
-import json
+import sys
 
-from .base import Base
+# sys.path.append("/models/")
+from models.base import Base
 
 
 class Rectangle(Base):
@@ -124,12 +125,12 @@ class Rectangle(Base):
             Class info string.
         """
         # from .rectangle import Rectangle
-        from .square import Square
 
         # if isinstance(self, Square) or size_in_args:
+        from .square import Square
         shape_type = 'Square' if (type(self) is Square
                                   or (type(self) is self.__class__ and
-                                      self.width == self.height))\
+                                      self.width == self.height)) \
             else 'Rectangle'
 
         dimensions = f"{self.width}" if shape_type == 'Square' \
@@ -164,7 +165,7 @@ class Rectangle(Base):
         Returns:
             None
         """
-        from.square import Square
+        from .square import Square
         size_in_args = 'size' in kwargs
 
         if not args and not kwargs:
@@ -186,13 +187,30 @@ class Rectangle(Base):
                 setattr(self, key, value)
 
     def to_dictionary(self):
-        from .square import Square
         """
-        Returns a dictionary representation of the instance.
+            Returns a dictionary representation of the instance.
 
-        Returns:
-            dict: A dictionary containing the attributes of the instance.
-        """
+            Returns:
+                dict: A dictionary containing the attributes of the instance.
+
+            This method creates a dictionary representation of the instance,
+            including the common attributes 'id', 'x', and 'y'. Depending on
+            the instance type (either a Rectangle or a Square), additional
+            attributes such as 'width' and 'height' or 'size' are included in
+            the dictionary.
+
+            Example:
+                For a Rectangle instance:
+                >>> rect = Rectangle(id=1, x=2, y=3, width=4, height=5)
+                >>> rect.to_dictionary()
+                {'id': 1, 'x': 2, 'y': 3, 'width': 4, 'height': 5}
+
+                For a Square instance:
+                >>> square = Square(id=1, x=2, y=3, size=4)
+                >>> square.to_dictionary()
+                {'id': 1, 'x': 2, 'y': 3, 'size': 4, 'width': 4, 'height': 4}
+            """
+        from .square import Square
         dic = {
             'id': self.id,
             'x': self.x,
@@ -208,3 +226,5 @@ class Rectangle(Base):
             dic['height'] = self.height
 
         return dic
+
+
