@@ -38,8 +38,10 @@ class Square(Rectangle):
     def size(self, value):
         """Set the width and height of the rectangle."""
         if isinstance(value, int) and value > 0:
-            self.update(height=value, width=value)
+            # self.update(height=value, width=value)
             self.__size = value
+            self.__width = value
+            self.__height = value
         else:
             raise ValueError("width must be an integer and > 0")
 
