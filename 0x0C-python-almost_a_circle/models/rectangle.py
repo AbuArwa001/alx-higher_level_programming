@@ -219,8 +219,6 @@ class Rectangle(Base):
 
         if isinstance(self, Square):
             dic['size'] = self.size
-            dic['width'] = self.size
-            dic['height'] = self.size
         else:
             dic['width'] = self.width
             dic['height'] = self.height
