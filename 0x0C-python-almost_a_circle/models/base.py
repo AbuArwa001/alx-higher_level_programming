@@ -113,7 +113,7 @@ class Base:
         """
         from models.rectangle import Rectangle
 
-        instance = Rectangle(1, 2, 3, 4, None)
+        instance = Rectangle(1, 2, 0, 0, None)
         instance.update(**dictionary)
 
         return instance
