@@ -16,6 +16,32 @@ class Base:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
 
+    @property
+    def id(self):
+        """Getter for `id`
+
+        Returns:
+            __id (int): unique identifer for each instance of cls
+
+        """
+        return self.__id
+
+    @id.setter
+    def id(self, value):
+        """Args:
+            value (int): number to be assigned as id
+
+        Attributes:
+            __id (int): unique identifer for each instance of cls
+
+        Raises:
+            ValueError: if `id` arg is 0, negative, or already assigned.
+
+        """
+        if value < 1:
+            raise ValueError('id must be positive')
+        self.__id = value
+
     @staticmethod
     def to_json_string(list_dictionaries):
         """
@@ -45,6 +71,10 @@ class Base:
             file_name = 'Square.json'
         else:
             file_name = 'Rectangle.json'
+        if not list_objs:
+            with open(file_name, 'w', encoding='utf-8') as f:
+                f.write("[]")
+            return
         list_dicts = [obj.to_dictionary() for obj in list_objs]
         jstring = cls.to_json_string(list_dicts)
 
