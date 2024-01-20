@@ -25,10 +25,10 @@ class Square(Rectangle):
             y: y-coordinate of the square
             id: id of the rectangle
         """
+        self.size = size
         super().__init__(width=size, height=size, x=0, y=0, id=id)
         self.x = x
         self.y = y
-        self.size = size
 
     @property
     def size(self):
@@ -37,7 +37,7 @@ class Square(Rectangle):
         Returns:
             int: The size of the Square.
         """
-        return self.width
+        return self.__size
 
     @size.setter
     def size(self, value):
