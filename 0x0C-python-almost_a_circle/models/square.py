@@ -62,8 +62,8 @@ class Square(Rectangle):
         # Update width, height, and size
         self.update(width=value, height=value)
         self.__size = value
-        self.__width = value
-        self.__height = value
+        # self.__width = value
+        # self.__height = value
 
     def update(self, *args, **kwargs):
         """
