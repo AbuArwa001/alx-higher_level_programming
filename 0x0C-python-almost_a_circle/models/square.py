@@ -32,11 +32,12 @@ class Square(Rectangle):
 
     @property
     def size(self):
+        """get the size of the Square."""
         return self.__size
 
     @size.setter
     def size(self, value):
-        """Set the width and height of the rectangle."""
+        """Set the size of the Square."""
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value <= 0:
