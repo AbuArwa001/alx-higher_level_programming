@@ -55,9 +55,9 @@ class Square(Rectangle):
             the Square's dimensions.
         """
         if not isinstance(value, int):
-            raise TypeError("Size must be an integer")
+            raise TypeError("width must be an integer")
         if value <= 0:
-            raise ValueError("Size must be greater than 0")
+            raise ValueError("width must be > 0")
 
         # Update width, height, and size
         self.update(width=value, height=value)
