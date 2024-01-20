@@ -2,6 +2,7 @@
 """Base module for shapes"""
 import json
 import csv
+import os
 
 
 class Base:
@@ -130,11 +131,14 @@ class Base:
         """
         from models.square import Square
         file_name = 'Square.json' if cls is Square else 'Rectangle.json'
-
-        with open(file_name, 'r', encoding='utf-8') as f:
-            txt = f.read()
-
+        if os.path.exists(file_name):
+            with open(file_name, 'r', encoding='utf-8') as f:
+                txt = f.read()
+        else:
+            return []
         key = 'id'
+        if not txt:
+            return txt
         list_objs = cls.from_json_string(txt)
 
         list_dicts = [cls.create(**obj) for obj in list_objs]
