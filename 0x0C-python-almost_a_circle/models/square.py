@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Module containing class Square"""
-from .rectangle import Rectangle
+from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
@@ -41,7 +41,7 @@ class Square(Rectangle):
             self.update(height=value, width=value)
             self.__size = value
         else:
-            raise TypeError("width must be an integer and > 0")
+            raise ValueError("width must be an integer and > 0")
 
     def update(self, *args, **kwargs):
         """
