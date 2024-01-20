@@ -24,7 +24,7 @@ class TestSquare(unittest.TestCase):
         self.default_square.size = 8
         self.assertEqual(self.default_square.size, 8)
 
-        with self.assertRaises(TypeError,
+        with self.assertRaises(ValueError,
                                msg="width must be an integer and > 0"):
             self.default_square.size = -3
 
@@ -50,8 +50,8 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(square.width, 10)
         self.assertEqual(square.height, 10)
 
-        with self.assertRaises(TypeError,
-                               msg="Size must be a positive integer."):
+        with self.assertRaises(ValueError,
+                               msg="width must be > 0"):
             square.size = -5
 
 
