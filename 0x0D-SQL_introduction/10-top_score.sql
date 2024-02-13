@@ -3,4 +3,4 @@
 -- Records should be ordered by score (top first)
 -- The database name will be passed as an argument of the mysql command
 -- guillaume@ubuntu:~/$ cat 10-top_score.sql | mysql -hlocalhost -uroot -p hbtn_0c_0
-SELECT score, name from second_table;
+SELECT score, name FROM second_table;
