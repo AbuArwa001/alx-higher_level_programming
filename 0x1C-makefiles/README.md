@@ -35,6 +35,3 @@ In the following tasks, we are going to use these files. We want to compile thes
 1. `make -f 0-Makefile`: Create your first Makefile.
 2. `make -f 1-Makefile`: Create your first useful Makefile.
 3. `make -f 2-Makefile`: Create your first useful Makefile.
-
----
-
