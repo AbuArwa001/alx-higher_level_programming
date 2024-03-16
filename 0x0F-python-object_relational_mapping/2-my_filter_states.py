@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Module for slecting rows in db That starts with CAPS N"""
+""" Module for slecting rows in db That filters search"""
 import MySQLdb
 import sys
 
@@ -8,7 +8,7 @@ def connector():
     """
     Establishes a connection to a MySQL database and retrieves
         all rows from the 'states' table,
-        where States start with capital N
+        where IT FILTERS SEARCH
     ordered by the 'id' column in ascending order.
 
     This function expects three command line arguments:
@@ -27,17 +27,17 @@ def connector():
     password = sys.argv[2]
     dbname = sys.argv[3]
     search = sys.argv[4]
+    string = """ SELECT *
+    FROM states
+    WHERE name = '{}'
+    ORDER BY id ASC;""".format(search)
     db = MySQLdb.connect(user=username,
                          passwd=password,
                          db=dbname,
                          host="localhost",
                          port=3306)
     cursor = db.cursor()
-    cursor.execute("""SELECT *
-                   FROM states
-                   WHERE name = %s
-                   ORDER BY id ASC;
-                   """, (search,))
+    cursor.execute(string)
     for row in cursor.fetchall():
         print(row)
     cursor.close()
