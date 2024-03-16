@@ -11,6 +11,8 @@ cursor=db.cursor()
 cursor.execute("""SELECT * 
 FROM states
 ORDER BY states.id ASC""")
-for i in cursor._rows:
-    print(i)
+
+if __name__ == "__main__":
+    for i in cursor._rows:
+        print(i)
 
