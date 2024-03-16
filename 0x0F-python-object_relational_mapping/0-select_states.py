@@ -4,9 +4,7 @@
 import MySQLdb
 db = MySQLdb.connect(user="root",
                      passwd="Khalif01@2023",
-                     db="hbtn_0e_0_usa",
-                     host="localhost",
-                     port=3306)
+                     db="hbtn_0e_0_usa")
 cursor=db.cursor()
 cursor.execute("""SELECT * 
 FROM states
