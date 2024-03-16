@@ -33,11 +33,12 @@ def connector():
                          port=3306)
     cursor = db.cursor()
     cursor.execute("""SELECT *
-    FROM states
-    WHERE name LIKE 'N%'
-    ORDER BY states.id ASC""")
-    for i in cursor._rows:
-        print(i)
+                   FROM states
+                   WHERE ASCII(SUBSTRING(name, 1, 1)) = 78
+                   ORDER BY id ASC;
+                   """)
+    for row in cursor.fetchall():
+        print(row)
     cursor.close()
     db.close()
 
