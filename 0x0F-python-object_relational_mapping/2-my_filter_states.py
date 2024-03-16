@@ -27,10 +27,15 @@ def connector():
     password = sys.argv[2]
     dbname = sys.argv[3]
     search = sys.argv[4]
-    string = """ SELECT *
-    FROM states
-    WHERE name = '{}'
-    ORDER BY id ASC;""".format(search)
+    if not search:
+        string = """SELECT *
+                    FROM states
+                    ORDER BY id ASC;"""
+    else:
+        string = """SELECT *
+                    FROM states
+                    WHERE name = '{}'
+                    ORDER BY id ASC;""".format(search)
     db = MySQLdb.connect(user=username,
                          passwd=password,
                          db=dbname,
