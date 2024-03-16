@@ -35,7 +35,7 @@ def connector():
     cursor.execute("""SELECT *
     FROM states
     WHERE name LIKE 'N%'
-    """)
+    ORDER BY states.id ASC""")
     for i in cursor._rows:
         print(i)
     cursor.close()
