@@ -38,7 +38,7 @@ def connector():
     con_str = 'mysql+mysqldb://{}:{}@localhost/{}'.format(username,
                                                           password,
                                                           dbname)
-    engine = create_engine(con_str, pool_pre_ping=True, echo=True)
+    engine = create_engine(con_str, pool_pre_ping=True)
 
     Session = sessionmaker(bind=engine)
     session = Session()
