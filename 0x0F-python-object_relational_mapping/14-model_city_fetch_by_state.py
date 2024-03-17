@@ -9,6 +9,7 @@ from model_city import City
 from sqlalchemy import (create_engine)
 from sqlalchemy import label, select
 from sqlalchemy.orm import sessionmaker,  aliased
+from model_state import State
 
 
 def connector():
@@ -42,13 +43,10 @@ def connector():
     Session = sessionmaker(bind=engine)
     session = Session()
     stmt = session.query(City).subquery()
-    
-    """ stmt = select(City.state_id, label('city_state',
-                                        City.state_id)]).subquery() """
-    ct_alias = aliased(City, stmt)
-    for state, city in session.query(State, ct_alias).\
-            join(ct_alias, State.id == City.state_id):
-        print(f"{state} {(state.id)} {city.name}")
+
+    for state,  city_id, city, st_id in session.query(State, stmt).\
+            join(stmt, State.id == stmt.c.state_id):
+        print(f"{state.name}: ({city_id}) {city}")
 
 
 if __name__ == "__main__":

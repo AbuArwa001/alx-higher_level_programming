@@ -4,8 +4,7 @@ a State and an instance Base = declarative_base()"""
 from sqlalchemy import Column, Integer, String, Sequence , ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-Base = declarative_base()
-
+from model_state import Base
 
 class City(Base):
     """
@@ -15,5 +14,5 @@ class City(Base):
     id = Column(Integer, Sequence('states_id_seq'), primary_key=True)
     name = Column(String(128), nullable=False)
     state_id = Column(Integer, ForeignKey('states.id'),  nullable=False)
-    cities = relationship("State",back_populates="cities")
+    cities = relationship("State")
 
