@@ -44,7 +44,8 @@ def connector():
 
     for row in query:
         session.delete(row)
-        session.commit()
+    session.commit()
+    session.close()
 
 
 if __name__ == "__main__":
