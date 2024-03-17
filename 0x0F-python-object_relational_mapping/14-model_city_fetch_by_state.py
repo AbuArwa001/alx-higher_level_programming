@@ -41,6 +41,7 @@ def connector():
     engine = create_engine(con_str, pool_pre_ping=True)
 
     Session = sessionmaker(bind=engine)
+    Base.metadata.create_all(engine)
     session = Session()
     stmt = session.query(City).order_by('state_id').subquery()
 
