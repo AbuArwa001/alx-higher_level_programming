@@ -38,7 +38,7 @@ def connector():
 
     Session = sessionmaker(bind=engine)
     session = Session()
-    state = State(name='Ohio')
+    state = State(name='Louisiana')
     session.add(state)
     session.commit()
     print(f"{state.id}")
