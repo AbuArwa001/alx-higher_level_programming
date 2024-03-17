@@ -9,7 +9,6 @@ from model_city import City
 from sqlalchemy import (create_engine)
 from sqlalchemy import label, select
 from sqlalchemy.orm import sessionmaker,  aliased
-from model_state import State
 
 
 def connector():
@@ -43,10 +42,11 @@ def connector():
     Session = sessionmaker(bind=engine)
     Base.metadata.create_all(engine)
     session = Session()
-    stmt = session.query(City).order_by('state_id').subquery()
+    
+    stmt = session.query(City).subquery()
 
     for state,  city_id, city, st_id in session.query(State, stmt).\
-            join(stmt, State.id == stmt.c.state_id):
+            join(stmt, State.id == stmt.c.state_id).order_by(stmt.c.id):
         print(f"{state.name}: ({city_id}) {city}")
     session.close()
 
