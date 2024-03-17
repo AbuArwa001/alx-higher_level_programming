@@ -47,6 +47,7 @@ def connector():
     for state,  city_id, city, st_id in session.query(State, stmt).\
             join(stmt, State.id == stmt.c.state_id):
         print(f"{state.name}: ({city_id}) {city}")
+    session.close()
 
 
 if __name__ == "__main__":
