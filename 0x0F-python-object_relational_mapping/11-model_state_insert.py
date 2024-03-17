@@ -30,7 +30,6 @@ def connector():
     username = sys.argv[1]
     password = sys.argv[2]
     dbname = sys.argv[3]
-    search = sys.argv[4]
 
     con_str = 'mysql+mysqldb://{}:{}@localhost/{}'.format(username,
                                                           password,
@@ -39,16 +38,10 @@ def connector():
 
     Session = sessionmaker(bind=engine)
     session = Session()
-    state = State(name='Louisiana')
+    state = State(name='Ohio')
     session.add(state)
     session.commit()
-    query = session.query(State.id, State.name).\
-        filter(State.name == state.name).first()
-
-    if query:
-        print(query[0])
-    else:
-        print("Not found")
+    print(f"{state.id}")
 
 
 if __name__ == "__main__":
