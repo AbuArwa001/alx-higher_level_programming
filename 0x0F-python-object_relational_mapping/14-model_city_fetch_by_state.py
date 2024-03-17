@@ -38,11 +38,11 @@ def connector():
     con_str = 'mysql+mysqldb://{}:{}@localhost/{}'.format(username,
                                                           password,
                                                           dbname)
-    engine = create_engine(con_str, pool_pre_ping=True)
+    engine = create_engine(con_str, pool_pre_ping=True, echo=True)
 
     Session = sessionmaker(bind=engine)
     session = Session()
-    stmt = session.query(City).subquery()
+    stmt = session.query(City).order_by('state_id').subquery()
 
     for state,  city_id, city, st_id in session.query(State, stmt).\
             join(stmt, State.id == stmt.c.state_id):
