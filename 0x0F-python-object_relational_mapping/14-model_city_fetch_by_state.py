@@ -41,11 +41,13 @@ def connector():
 
     Session = sessionmaker(bind=engine)
     session = Session()
-    stmt = select([City.state_id, label('city_state',
-                                        City.state_id)]).subquery()
+    stmt = session.query(City).subquery()
+    
+    """ stmt = select(City.state_id, label('city_state',
+                                        City.state_id)]).subquery() """
     ct_alias = aliased(City, stmt)
     for state, city in session.query(State, ct_alias).\
-        join(ct_alias, State.id == ct_alias.c.city_state):
+            join(ct_alias, State.id == City.state_id):
         print(f"{state} {(state.id)} {city.name}")
 
 
