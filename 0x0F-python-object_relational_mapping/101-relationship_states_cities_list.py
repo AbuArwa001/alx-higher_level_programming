@@ -7,7 +7,7 @@ from relationship_city import City
 
 
 from sqlalchemy import (create_engine)
-from sqlalchemy import label, select
+from sqlalchemy import label, select, asc
 from sqlalchemy.orm import sessionmaker,  aliased
 from sqlalchemy.orm import joinedload
 
@@ -44,11 +44,15 @@ def connector():
     Base.metadata.create_all(engine)
     session = Session()
 
-    stmt = session.query(City).subquery()
-    Q_object = session.query(State).options(joinedload(State.cities))
+    # stmt = session.query(City).order_by(City.id).subquery()
+    # Q_object = session.query(State).options(joinedload(State.cities)).\
+    #             order_by(asc(State.id))
+    stmt = session.query(City).order_by(City.id).subquery()
+    Q_object = session.query(State).options(joinedload(State.cities)).\
+            join(stmt, State.id == stmt.c.state_id).order_by(asc(State.id))
+
     # Q_object = session.query(State).options(joinedload(State.cities)).\
     #     join(stmt, State.id == stmt.c.state_id).order_by(stmt.c.id)
-
     for state in Q_object:
         print(f"{state.id}: {state.name}:")
         for city in state.cities:
