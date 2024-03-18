@@ -9,6 +9,7 @@ from relationship_city import City
 from sqlalchemy import (create_engine)
 from sqlalchemy import label, select
 from sqlalchemy.orm import sessionmaker,  aliased
+from sqlalchemy.orm import joinedload
 
 
 def connector():
@@ -44,16 +45,13 @@ def connector():
     session = Session()
 
     stmt = session.query(City).subquery()
-    Q_object = session.query(State, stmt).\
+    Q_object = session.query(State).options(joinedload(State.cities)).\
         join(stmt, State.id == stmt.c.state_id).order_by(stmt.c.id)
-    dup_list = []
-    print(Q_object)
-    for state,  city_id, city, st_id in Q_object:
-        if state.name not in dup_list:
-            print(f"{state.id}: {state.name}:")
-            for city in state.cities:
-                print(f"\t{city.id}: {city.name}")
-        dup_list.append(state.name)
+
+    for state in Q_object:
+        print(f"{state.id}: {state.name}:")
+        for city in state.cities:
+            print(f"\t{city.id}: {city.name}")
 
     session.close()
 
