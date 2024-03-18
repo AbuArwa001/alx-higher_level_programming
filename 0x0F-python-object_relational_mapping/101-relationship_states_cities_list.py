@@ -45,8 +45,9 @@ def connector():
     session = Session()
 
     stmt = session.query(City).subquery()
-    Q_object = session.query(State).options(joinedload(State.cities)).\
-        join(stmt, State.id == stmt.c.state_id).order_by(stmt.c.id)
+    Q_object = session.query(State).options(joinedload(State.cities))
+    # Q_object = session.query(State).options(joinedload(State.cities)).\
+    #     join(stmt, State.id == stmt.c.state_id).order_by(stmt.c.id)
 
     for state in Q_object:
         print(f"{state.id}: {state.name}:")
