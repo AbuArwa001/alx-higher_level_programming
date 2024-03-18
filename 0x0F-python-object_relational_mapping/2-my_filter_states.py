@@ -34,7 +34,7 @@ def connector():
     else:
         string = """SELECT *
                     FROM states
-                    WHERE name = '{}'
+                    WHERE BINARY `name` = '{}'
                     ORDER BY id ASC;""".format(search)
     db = MySQLdb.connect(user=username,
                          passwd=password,
