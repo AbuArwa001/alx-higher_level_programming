@@ -42,7 +42,7 @@ def connector():
     Session = sessionmaker(bind=engine)
     Base.metadata.create_all(engine)
     session = Session()
-    
+
     stmt = session.query(City).subquery()
 
     for state,  city_id, city, st_id in session.query(State, stmt).\
