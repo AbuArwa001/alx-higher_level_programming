@@ -2,8 +2,8 @@
 """ Module that lists all States from the
 database hbtn_0e_4_usa Using SqlAlchemy"""
 import sys
-from fake import Base, State
-# from relationship_state import Base, State
+# from fake import Base, State
+from relationship_state import Base, State
 from relationship_city import City
 
 
