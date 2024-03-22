@@ -2,7 +2,8 @@
 """ Module that lists all States from the
 database hbtn_0e_4_usa Using SqlAlchemy"""
 import sys
-from relationship_state import Base, State
+from fake import Base, State
+# from relationship_state import Base, State
 from relationship_city import City
 
 
@@ -47,10 +48,12 @@ def connector():
     # stmt = session.query(City).order_by(City.id).subquery()
     # Q_object = session.query(State).options(joinedload(State.cities)).\
     #             order_by(asc(State.id))
+    # Create a subquery for City ordered by ID
     stmt = session.query(City).order_by(City.id).subquery()
-    Q_object = session.query(State).options(joinedload(State.cities)).\
-            join(stmt, State.id == stmt.c.state_id).order_by(asc(State.id))
 
+    # Query State and join with the subquery, ordering by State ID
+    Q_object = session.query(State).\
+        join(stmt, State.id == stmt.c.state_id).order_by(asc(State.id))
     # Q_object = session.query(State).options(joinedload(State.cities)).\
     #     join(stmt, State.id == stmt.c.state_id).order_by(stmt.c.id)
     for state in Q_object:
