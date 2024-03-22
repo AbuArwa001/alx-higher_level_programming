@@ -16,5 +16,5 @@ class State(Base):
     __tablename__ = 'states'
     id = Column(Integer, Sequence('states_id_seq'), primary_key=True)
     name = Column(String(128), nullable=False)
-    cities = relationship("City", back_populates="state",
+    cities = relationship("City", backref="state",
                           cascade="all, delete, delete-orphan")
