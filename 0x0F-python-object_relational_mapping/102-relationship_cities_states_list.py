@@ -43,16 +43,10 @@ def connector():
     Session = sessionmaker(bind=engine)
     Base.metadata.create_all(engine)
     session = Session()
-
-    stmt = session.query(State).subquery()
-    Q_object = session.query(City).options(joinedload(City.state))
-
-    for city in Q_object:
-        # <city id>: <city name> -> <state name>
-        # print(f"{state.cities.state}: {state.cities} -> {state.name}")
-        # print(f"{state.cities.state}: {state.cities} -> {state.name}")
-        print(f"{city.id}: {city.name} -> {city.state.name}")
-
+    for city, state in session.query(City, State)\
+                              .join(State, State.id == City.state_id)\
+                              .order_by(City.id):
+        print("{}: {} -> {}".format(city.id, city.name, state.name))
     session.close()
 
 
