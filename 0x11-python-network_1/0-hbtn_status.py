@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-from urllib import request
-
-url = 'https://alx-intranet.hbtn.io/status'
-req = request.Request(url)
-
 
 if __name__ == "__main__":
+    from urllib import request
+
+    url = 'https://alx-intranet.hbtn.io/status'
+    req = request.Request(url)
     with request.urlopen(req) as response:
         red = response.read()
         print(f"Body response:")
