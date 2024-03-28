@@ -12,4 +12,4 @@ if __name__ == "__main__":
         print(f"Body response:")
         print(f"\t- type: {type(red)}")
         print(f"\t- content: {red}")
-        print("\t- utf8 content: {}".format(red.decode("utf-8")))
+        print(f"\t- utf8 content: {red.decode("utf-8")}")
