@@ -57,7 +57,6 @@ Upon completion of this project, you should be able to explain the following con
      Your email is: hr@holbertonschool.com
      ```
 
-
 ## Task 9. My GitHub!
    - Write a Python script that takes your GitHub credentials (username and password) and uses the GitHub API to display your id
    - Use Basic Authentication with a personal access token as password to access your information

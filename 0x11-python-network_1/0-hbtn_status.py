@@ -12,5 +12,4 @@ with request.urlopen(req) as response:
     content_type = response.info().get('Content-Type')
     if content_type and 'charset=utf-8' in content_type.lower():
         print(f"\t- content: OK")
-        # print("Charset is UTF-8")
     print(f"\t- utf8 content: {response.reason}")
