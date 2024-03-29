@@ -13,5 +13,5 @@ if __name__ == "__main__":
     request = requests.get(url)
     try:
         print(request.headers['X-Request-Id'])
-    except:
+    except Exception:
         pass
