@@ -12,7 +12,6 @@ if __name__ == "__main__":
     email = sys.argv[2]
     values['email'] = email
     data = parse.urlencode(values)
-    print(data)
     data = data.encode('ascii')
     url = sys.argv[1]
     req = request.Request(url, data)
