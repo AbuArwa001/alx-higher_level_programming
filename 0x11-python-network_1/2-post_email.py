@@ -13,7 +13,7 @@ if __name__ == "__main__":
     values['email'] = email
     data = parse.urlencode(values)
     print(data)
-    data = data.encode('utf-8')
+    data = data.encode('ascii')
     url = sys.argv[1]
     req = request.Request(url, data)
     with request.urlopen(req) as response:
