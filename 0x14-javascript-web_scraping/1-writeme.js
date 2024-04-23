@@ -8,7 +8,6 @@ const content = process.argv[3];
 function writeInFile (filePath, content) {
   try {
     fs.writeFileSync(filePath, content);
-    console.log(`Content written to ${filePath}`);
   } catch (err) {
     console.error(err);
   }
