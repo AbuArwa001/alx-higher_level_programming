@@ -10,7 +10,7 @@ request(url, function (error, response, body) {
   try {
     const films = JSON.parse(body).results;
     const wedgeAntillesId = '18'; // Assuming '18' is the ID for Wedge Antilles
-    let count = films.reduce((acc, film) => {
+    const count = films.reduce((acc, film) => {
       const hasWedge = film.characters.some(characterUrl => characterUrl.endsWith(`/${wedgeAntillesId}/`));
       return acc + (hasWedge ? 1 : 0);
     }, 0);
